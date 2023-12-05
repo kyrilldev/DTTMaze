@@ -65,14 +65,16 @@ public class GameManager : MonoBehaviour
             // Randomly select a cell from unvisitedCells
             Vector2Int currentCell = unvisitedCells[Random.Range(0, unvisitedCells.Count)];
 
-            List<Vector2Int> randomPath = new List<Vector2Int>
+            List<Vector2Int> randomPath = new()
             {
                 currentCell
             };
 
             // Continue random walk until we reach a visited cell
-            while (maze[currentCell.x, currentCell.y] == 1)
+            while (maze[currentCell.x, currentCell.y] > 0)
             {
+                maze[currentCell.x, currentCell.y] = 0;
+                unvisitedCells.Remove(currentCell);
                 List<Vector2Int> neighbors = GetNeighbors(currentCell);
                 currentCell = neighbors[Random.Range(0, neighbors.Count)];
                 randomPath.Add(currentCell);
@@ -87,8 +89,6 @@ public class GameManager : MonoBehaviour
             }
 
             // Mark currentCell as visited
-            maze[currentCell.x, currentCell.y] = 0;
-            unvisitedCells.Remove(currentCell);
         }
 
         // Now, 'maze' contains the generated maze (0 for paths, 1 for walls)
