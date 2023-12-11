@@ -14,19 +14,4 @@ public class TileRegulator : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
-
-    public void ChangeTile(Tile tile, int state)
-    {
-        tile.ChangeState(state);
-    }
 }

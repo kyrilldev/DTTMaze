@@ -2,37 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum NodeState
+{
+    Available,
+    Current,
+    Completed
+}
+
 public class Tile : MonoBehaviour
 {
     public int visited = 1;//0 yes, 1 no
     public Vector2Int pos;
+    [SerializeField] GameObject[] walls;//right, left, up, down
     private MeshRenderer meshRenderer;
 
-    private void Start()
+    private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-        ChangeColor(visited);
     }
 
-    public void ChangeState(int state)
+    public void RemoveWall(int wallToRemove)
     {
-        if (visited != state)
+        if (walls[wallToRemove].gameObject)
         {
-            visited = state;
+            walls[wallToRemove].SetActive(false);
         }
-
-        ChangeColor(state);
     }
 
-    private void ChangeColor(int state)
+    public void SetWallsDefault()
     {
-        if (state == 1)
+        for (int i = 0; i < walls.Length; i++)
         {
-            meshRenderer.material.color = Color.black;
+            walls[i].SetActive(true);
         }
-        else
+    }
+
+    public void SetState(NodeState state)
+    {
+        switch (state)
         {
-            meshRenderer.material.color = Color.white;
+            case NodeState.Available:
+                meshRenderer.material.color = Color.white;
+                break;
+            case NodeState.Current:
+                meshRenderer.material.color = Color.yellow;
+                break;
+            case NodeState.Completed:
+                meshRenderer.material.color = Color.blue;
+                break;
         }
     }
 }
