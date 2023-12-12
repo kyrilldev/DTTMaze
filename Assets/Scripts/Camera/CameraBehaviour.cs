@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class ScrollingBehaviour : MonoBehaviour
+public class CameraBehaviour : MonoBehaviour
 {
     [SerializeField] private float zoomAmount;
     [SerializeField] private float minZoomAmount;
@@ -24,7 +24,6 @@ public class ScrollingBehaviour : MonoBehaviour
     private void Update()
     {
         var zoom = Input.GetAxis("Mouse ScrollWheel");
-        Debug.Log(zoom * ZoomMultiplier());
         Zoom(zoom);
 
         if (Input.GetMouseButtonDown(0))

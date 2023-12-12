@@ -1,26 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public enum NodeState
 {
-    Available,
-    Current,
-    Completed
+    Available,//not visited yet
+    Current,//where the algorithm currently is
+    Completed//cells which aren't going to change
 }
 
 public class Tile : MonoBehaviour
 {
-    public int visited = 1;//0 yes, 1 no
-    public Vector2Int pos;
     [SerializeField] GameObject[] walls;//right, left, up, down
-    private MeshRenderer meshRenderer;
+    private MeshRenderer meshRenderer;//for colors
 
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
     }
 
+    /// <summary>
+    /// Function called when forming path to delete walls that interfere with the path direction
+    /// </summary>
+    /// <param name="wallToRemove"></param>
     public void RemoveWall(int wallToRemove)
     {
         if (walls[wallToRemove].gameObject)
@@ -29,18 +29,13 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public void SetWallsDefault()
-    {
-        for (int i = 0; i < walls.Length; i++)
-        {
-            walls[i].SetActive(true);
-        }
-    }
-
+    /// <summary>
+    /// Function to set states/colors of the cell to indicate where the algorithm is currently working
+    /// </summary>
+    /// <param name="state"></param>
     public void SetState(NodeState state)
     {
-        switch (state)
-        {
+        switch (state) {
             case NodeState.Available:
                 meshRenderer.material.color = Color.white;
                 break;
