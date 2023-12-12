@@ -412,12 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97a345e686c0da644a43a83cd0e4d87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoomAmount: 0
-  minZoomAmount: 5
-  maxZoomAmount: 250
-  startZoomAmount: 10
-  cam: {fileID: 0}
-  touchstart: {x: 0, y: 0, z: 0}
+  _minZoomAmount: 5
+  _maxZoomAmount: 250
+  _startZoomAmount: 5
+  _touchstart: {x: 0, y: 0, z: 0}
 --- !u!114 &1157459213 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3349388445355048404, guid: 9d18f105fd5f8d948a4e0445d07b9141, type: 3}
@@ -468,21 +466,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1157459213}
     - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
-      propertyPath: _width2
+      propertyPath: _clamp
+      value: 
+      objectReference: {fileID: 1967919427}
+    - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
+      propertyPath: _toggle
+      value: 
+      objectReference: {fileID: 1157459213}
+    - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
+      propertyPath: _widthInputF
       value: 
       objectReference: {fileID: 227521219}
-    - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
-      propertyPath: _height2
-      value: 
-      objectReference: {fileID: 1250628917}
     - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
       propertyPath: _heightInputF
       value: 
       objectReference: {fileID: 1250628917}
-    - target: {fileID: 1701128847262543490, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
-      propertyPath: _width2InputF
-      value: 
-      objectReference: {fileID: 227521219}
     - target: {fileID: 2978761553716071696, guid: 6ecff03208856564aad967b1d01c50e6, type: 3}
       propertyPath: m_Name
       value: GameManager

@@ -183,9 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5f574e794d2fb647aabb1b226c1d69c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  visited: 1
-  pos: {x: 0, y: 0}
-  walls:
+  _walls:
   - {fileID: 7699191931260938145}
   - {fileID: 3189749071167969907}
   - {fileID: 6742332638738287958}

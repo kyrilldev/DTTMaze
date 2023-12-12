@@ -1,65 +1,59 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraBehaviour : MonoBehaviour
 {
-    [SerializeField] private float zoomAmount;
-    [SerializeField] private float minZoomAmount;
-    [SerializeField] private float maxZoomAmount;
-    [SerializeField] private float startZoomAmount;
-    private float previousSize;
+    [Header("Zoom Variables")]
+    [SerializeField] private float _minZoomAmount;
+    [SerializeField] private float _maxZoomAmount;
+    [SerializeField] private float _startZoomAmount;
 
-    [SerializeField] private Camera cam;
-    [SerializeField] Vector3 touchstart;
-
-    private void Start()
-    {
-        cam = GetComponent<Camera>();
-        zoomAmount = startZoomAmount;
-        previousSize = cam.orthographicSize;
-    }
+    [Header("Vector3 Touch")]
+    [SerializeField] private Vector3 _touchstart;
 
     private void Update()
     {
         var zoom = Input.GetAxis("Mouse ScrollWheel");
         Zoom(zoom);
 
+        //on first touch
         if (Input.GetMouseButtonDown(0))
         {
-            touchstart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            _touchstart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
+        //multiple touches
         if (Input.touchCount == 2)
         {
+            //get first and second touch
             Touch touchZero = Input.GetTouch(0);
             Touch touchOne = Input.GetTouch(1);
 
+            //previous touch pos from current position - the difference between current touch and prev touch (deltaPosition)
             Vector2 touchZeroPrevPos = touchZero.position - touchZero.deltaPosition;
             Vector2 touchOnePrevPos = touchOne.position - touchOne.deltaPosition;
-
+            
+            //prev vector length
             float prevMagnitude = (touchZeroPrevPos - touchOnePrevPos).magnitude;
+            //current vector length
             float currentMagnitude = (touchZero.position - touchOne.position).magnitude;
 
+            //length off the difference between 2 vectors
             float difference = currentMagnitude - prevMagnitude;
-
+            //apply
             Zoom(difference * 0.01f);
         }
+        //when user keeps holding
         else if (Input.GetMouseButton(0))
         {
-            Vector3 direction = touchstart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //calculate move amount by subtracting ,mouse position on screen, off touch start set before
+            Vector3 direction = _touchstart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            //apply new position
             Camera.main.transform.position += direction;
         }
     }
 
     private void Zoom(float increment)
     {
-        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, minZoomAmount, maxZoomAmount);
-    }
-
-    private float ZoomMultiplier()
-    {
-        float size = Camera.main.orthographicSize / 20;
-        return size * 30;
+        //apply size, clamped with pre set min and max
+        Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, _minZoomAmount, _maxZoomAmount);
     }
 }

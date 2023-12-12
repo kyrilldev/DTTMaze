@@ -9,23 +9,23 @@ public enum NodeState
 
 public class Tile : MonoBehaviour
 {
-    [SerializeField] GameObject[] walls;//right, left, up, down
-    private MeshRenderer meshRenderer;//for colors
+    [SerializeField] private GameObject[] _walls;//right, left, up, down
+    private MeshRenderer _meshRenderer;//for colors
 
     private void Awake()
     {
-        meshRenderer = GetComponent<MeshRenderer>();
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
     /// <summary>
-    /// Function called when forming path to delete walls that interfere with the path direction
+    /// Function called when forming path to delete _walls that interfere with the path direction
     /// </summary>
     /// <param name="wallToRemove"></param>
     public void RemoveWall(int wallToRemove)
     {
-        if (walls[wallToRemove].gameObject)
+        if (_walls[wallToRemove])
         {
-            walls[wallToRemove].SetActive(false);
+            _walls[wallToRemove].SetActive(false);
         }
     }
 
@@ -37,13 +37,13 @@ public class Tile : MonoBehaviour
     {
         switch (state) {
             case NodeState.Available:
-                meshRenderer.material.color = Color.white;
+                _meshRenderer.material.color = Color.white;
                 break;
             case NodeState.Current:
-                meshRenderer.material.color = Color.yellow;
+                _meshRenderer.material.color = Color.yellow;
                 break;
             case NodeState.Completed:
-                meshRenderer.material.color = Color.blue;
+                _meshRenderer.material.color = Color.blue;
                 break;
         }
     }

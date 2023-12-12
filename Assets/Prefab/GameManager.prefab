@@ -47,9 +47,10 @@ MonoBehaviour:
   width: 80
   height: 80
   _tilePrefab: {fileID: 4040146836267276367, guid: c6b86d8314096f345a39a05c67175d57, type: 3}
-  _width2: {fileID: 0}
-  _height2: {fileID: 0}
+  _widthInputF: {fileID: 0}
+  _heightInputF: {fileID: 0}
   nodes: []
   animated: 0
   Toggle: {fileID: 0}
   clamp: {fileID: 0}
+  test: {x: 0, y: 0, z: 0}
